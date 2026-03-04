@@ -5,4 +5,7 @@
     <Project Path="src/HomeMaintenanceManager.Domain/HomeMaintenanceManager.Domain.csproj" />
     <Project Path="src/HomeMaintenanceManager.Infrastructure/HomeMaintenanceManager.Infrastructure.csproj" />
   </Folder>
+  <Folder Name="/tests/">
+    <Project Path="tests/HomeMaintenanceManager.Domain.Tests/HomeMaintenanceManager.Domain.Tests.csproj" />
+  </Folder>
 </Solution>

@@ -1,17 +1,9 @@
 namespace HomeMaintenanceManager.Domain.Entities;
 
-public enum AssetStatus
-{
-    Active = 1,
-    Inactive = 2,
-    Retired = 3,
-}
-
 public class Asset
 {
     public Guid Id { get; private set; }
     public string Name { get; private set; }
-    public AssetStatus Status { get; private set; }
 
     public Asset(string name)
     {
@@ -20,6 +12,13 @@ public class Asset
 
         Id = Guid.NewGuid();
         Name = name;
-        Status = AssetStatus.Active;
+    }
+
+    public void Rename(string newName)
+    {
+        if (string.IsNullOrWhiteSpace(newName))
+            throw new ArgumentException("New asset name cannot be empty.", nameof(newName));
+
+        Name = newName;
     }
 }

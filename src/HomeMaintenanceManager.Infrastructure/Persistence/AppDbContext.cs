@@ -3,11 +3,8 @@ using Microsoft.EntityFrameworkCore;
 
 namespace HomeMaintenanceManager.Infrastructure.Persistence;
 
-public class AppDbContext : DbContext
+public class AppDbContext(DbContextOptions<AppDbContext> options) : DbContext(options)
 {
     public DbSet<Asset> Assets => Set<Asset>();
     public DbSet<MaintenanceTask> MaintenanceTasks => Set<MaintenanceTask>();
-
-    public AppDbContext(DbContextOptions<AppDbContext> options)
-        : base(options) { }
 }

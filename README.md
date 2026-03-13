@@ -29,11 +29,17 @@ dotnet user-secrets init
 dotnet user-secrets set "ConnectionStrings:DefaultConnection" "Host=localhost;Port=5432;Database=home_maintenance_manager;Username=postgres;Password=supersecret"
 ```
 
-3. Run the project:
+3. Set up the database:
 ```bash
 # Start the PostgreSQL database
 docker compose up
 
+# Run the migrations
+dotnet ef database update --project src/HomeMaintenanceManager.Infrastructure --startup-project src/HomeMaintenanceManager.API
+```
+
+4. Run the project:
+```bash
 # Start the API
 dotnet run --project src/HomeMaintenanceManager.API
 ```

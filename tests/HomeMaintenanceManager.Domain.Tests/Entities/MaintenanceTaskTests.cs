@@ -1,7 +1,6 @@
-using System.Runtime.InteropServices;
 using HomeMaintenanceManager.Domain.Entities;
 
-namespace HomeMaintenanceManager.Domain.Tests;
+namespace HomeMaintenanceManager.Domain.Tests.Entities;
 
 public class MaintenanceTaskTests
 {

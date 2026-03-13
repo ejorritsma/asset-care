@@ -2,9 +2,9 @@ using HomeMaintenanceManager.Domain.Entities;
 
 namespace HomeMaintenanceManager.Application.Assets.Commands;
 
-public class CreateAsset(IAssetRepository _assetRepository)
+public class CreateAsset(IAssetRepository assetRepository)
 {
-    private readonly IAssetRepository _assetRepository = _assetRepository;
+    private readonly IAssetRepository _assetRepository = assetRepository;
 
     public async Task<Guid> Execute(string name)
     {

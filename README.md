@@ -16,7 +16,7 @@ To run this project locally:
 ```env
 POSTGRES_USER=postgres
 POSTGRES_PASSWORD=supersecret
-POSTGRES_DB=home_maintenance_manager
+POSTGRES_DB=asset_care
 POSTGRES_HOST=localhost
 POSTGRES_PORT=5432
 ```
@@ -26,7 +26,7 @@ POSTGRES_PORT=5432
 cd src/AssetCare.API
 
 dotnet user-secrets init
-dotnet user-secrets set "ConnectionStrings:DefaultConnection" "Host=localhost;Port=5432;Database=home_maintenance_manager;Username=postgres;Password=supersecret"
+dotnet user-secrets set "ConnectionStrings:DefaultConnection" "Host=localhost;Port=5432;Database=asset_care;Username=postgres;Password=supersecret"
 ```
 
 3. Set up the database:

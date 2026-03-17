@@ -1,5 +1,6 @@
 using AssetCare.Application.Assets;
 using AssetCare.Domain.Entities;
+using Microsoft.EntityFrameworkCore;
 
 namespace AssetCare.Infrastructure.Persistence;
 
@@ -14,7 +15,7 @@ public class AssetRepository(AppDbContext dbContext) : IAssetRepository
 
     public async Task<Asset?> GetByIdAsync(Guid id)
     {
-        return await _dbContext.Assets.FindAsync(keyValues: id);
+        return await _dbContext.Assets.AsNoTracking().SingleOrDefaultAsync(a => a.Id == id);
     }
 
     public async Task SaveChangesAsync()

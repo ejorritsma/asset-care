@@ -1,10 +1,12 @@
 using AssetCare.Domain.Entities;
+using Microsoft.Extensions.Logging;
 
 namespace AssetCare.Application.Assets.Commands;
 
-public class AssetService(IAssetRepository assetRepository)
+public class AssetService(IAssetRepository assetRepository, ILogger<AssetService> logger)
 {
     private readonly IAssetRepository _assetRepository = assetRepository;
+    private readonly ILogger<AssetService> _logger = logger;
 
     public async Task<Guid> Create(string name)
     {
@@ -18,6 +20,7 @@ public class AssetService(IAssetRepository assetRepository)
 
     public async Task Rename(Guid id, string newName)
     {
+
         var asset =
             await _assetRepository.GetByIdAsync(id)
             ?? throw new Exception($"Asset with ID {id} not found.");

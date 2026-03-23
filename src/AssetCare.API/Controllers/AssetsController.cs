@@ -6,9 +6,11 @@ using Microsoft.AspNetCore.Mvc;
 
 [ApiController]
 [Route("/assets")]
-public class AssetsController(AssetService assetService) : ControllerBase
+public class AssetsController(AssetService assetService, ILogger<AssetsController> logger)
+    : ControllerBase
 {
     private readonly AssetService _assetService = assetService;
+    private readonly ILogger<AssetsController> _logger = logger;
 
     [HttpPost]
     public async Task<IActionResult> Create(CreateAssetRequest createAssetRequest)
@@ -24,7 +26,9 @@ public class AssetsController(AssetService assetService) : ControllerBase
         var asset = await _assetService.GetById(id: id);
 
         if (asset is null)
+        {
             return NotFound();
+        }
 
         var response = new AssetResponse
         {
@@ -41,6 +45,7 @@ public class AssetsController(AssetService assetService) : ControllerBase
     {
         if (updateAssetRequest.Name is not null)
         {
+            _logger.LogInformation("[HTTP PATCH] Rename asset {AssetId}", id);
             try
             {
                 await _assetService.Rename(id: id, newName: updateAssetRequest.Name);

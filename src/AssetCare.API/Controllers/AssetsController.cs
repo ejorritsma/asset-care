@@ -6,16 +6,13 @@ using Microsoft.AspNetCore.Mvc;
 
 [ApiController]
 [Route("/assets")]
-public class AssetsController(AssetService assetService, ILogger<AssetsController> logger)
-    : ControllerBase
+public class AssetsController(AssetService assetService) : ControllerBase
 {
     private readonly AssetService _assetService = assetService;
-    private readonly ILogger<AssetsController> _logger = logger;
 
     [HttpPost]
     public async Task<IActionResult> Create(CreateAssetRequest createAssetRequest)
     {
-        _logger.LogInformation("Creating asset {AssetName}", createAssetRequest.Name);
         var id = await _assetService.Create(name: createAssetRequest.Name);
 
         return Created($"/assets/{id}", id);
@@ -46,7 +43,6 @@ public class AssetsController(AssetService assetService, ILogger<AssetsControlle
     {
         if (updateAssetRequest.Name is not null)
         {
-            _logger.LogInformation("Rename asset {AssetId}", id);
             try
             {
                 await _assetService.Rename(id: id, newName: updateAssetRequest.Name);
@@ -58,11 +54,6 @@ public class AssetsController(AssetService assetService, ILogger<AssetsControlle
         }
         if (updateAssetRequest.Status.HasValue)
         {
-            _logger.LogInformation(
-                "Change status of asset {AssetId} to {NewStatus}",
-                id,
-                updateAssetRequest.Status.Value
-            );
             await _assetService.ChangeStatus(id: id, newStatus: updateAssetRequest.Status.Value);
         }
 
